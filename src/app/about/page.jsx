@@ -10,6 +10,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import CTA from "../components/CTA";
+import WhyChooseUs from "../components/WhyChooseUs";
 
 /* -------------------------------------------------------------------------- */
 /*                               ANIMATIONS                                   */
@@ -276,6 +277,8 @@ export default function AboutPage() {
           </motion.div>
         </div>
       </section>
+
+      <WhyChooseUs/>
 
       <CTA />
     </main>

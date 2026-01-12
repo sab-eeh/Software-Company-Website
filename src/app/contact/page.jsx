@@ -130,7 +130,7 @@ export default function ContactPage() {
                       href="mailto:hello@yourcompany.com"
                       className="text-sm text-muted-foreground hover:underline"
                     >
-                      hello@yourcompany.com
+                      themastek.co@gmail.com
                     </a>
                   </div>
                 </div>
@@ -140,7 +140,7 @@ export default function ContactPage() {
                   <div>
                     <div className="text-sm font-semibold">Phone</div>
                     <p className="text-sm text-muted-foreground">
-                      +92 300 0000000
+                      +92 3198 548 849
                     </p>
                   </div>
                 </div>

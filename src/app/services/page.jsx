@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
+  Sparkles,
   Code2,
   LayoutGrid,
   Smartphone,
@@ -11,19 +12,24 @@ import {
   Brain,
   Search,
   Palette,
-  CheckCircle2,
-  Sparkles,
-  Layers,
   Rocket,
+  Layers,
   Settings,
+  CheckCircle2,
 } from "lucide-react";
 
 import CTA from "../components/CTA";
-import { ButtonLink } from "../../components/ui/button";
 
 /* -------------------------------------------------------------------------- */
 /*                                ANIMATIONS                                  */
 /* -------------------------------------------------------------------------- */
+
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.08 },
+  },
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -34,37 +40,6 @@ const fadeUp = {
   },
 };
 
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.08 },
-  },
-};
-
-/* -------------------------------------------------------------------------- */
-/*                            MOTION WRAPPER                                  */
-/* -------------------------------------------------------------------------- */
-
-function MotionSection({ children, className }) {
-  const reduceMotion = useReducedMotion();
-
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
-  return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-120px" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 /* -------------------------------------------------------------------------- */
 /*                                   DATA                                     */
 /* -------------------------------------------------------------------------- */
@@ -73,54 +48,38 @@ const services = [
   {
     icon: Code2,
     title: "Web Development",
-    desc: "Fast, modern websites and web apps built on clean, scalable architecture.",
-    points: ["Next.js App Router", "SEO-first structure", "Responsive UI system"],
+    desc: "High-performance websites and platforms built with modern frameworks.",
+    points: ["Next.js & React", "SEO-ready structure", "Responsive systems"],
   },
   {
     icon: LayoutGrid,
-    title: "SaaS & Platform Development",
-    desc: "Dashboards and platforms designed to grow with your product.",
-    points: [
-      "Reusable components",
-      "Auth-ready UI patterns",
-      "Performance-first setup",
-    ],
+    title: "SaaS & Dashboards",
+    desc: "Scalable UI systems for products that evolve over time.",
+    points: ["Component libraries", "Auth-ready layouts", "Maintainable code"],
   },
   {
     icon: Smartphone,
-    title: "App Development",
-    desc: "Mobile-first interfaces focused on usability and clarity.",
-    points: ["UX-first screens", "Clear navigation flows", "Production-ready UI"],
+    title: "App Interfaces",
+    desc: "Mobile-first experiences designed for clarity and usability.",
+    points: ["UX-driven flows", "Clear navigation", "Production-ready UI"],
   },
   {
     icon: Bot,
     title: "AI Automation",
-    desc: "Automation systems that reduce manual work using practical AI.",
-    points: ["Workflow automation", "Tool integration", "Time-saving systems"],
+    desc: "Smart systems that reduce repetitive work.",
+    points: ["Workflow automation", "Tool integration", "Efficiency focused"],
   },
   {
     icon: Brain,
     title: "Machine Learning",
-    desc: "ML integrations focused on real business outcomes.",
-    points: ["Use-case driven ML", "Data workflows", "Integration planning"],
+    desc: "Practical ML features aligned with business goals.",
+    points: ["Use-case driven ML", "Data pipelines", "Integration planning"],
   },
   {
     icon: Search,
     title: "SEO & Performance",
-    desc: "Speed, structure, and analytics that help your site convert.",
-    points: ["Core Web Vitals", "Tracking readiness", "Optimized assets"],
-  },
-  {
-    icon: Palette,
-    title: "UI & Brand Design",
-    desc: "Design systems that feel premium and conversion-focused.",
-    points: ["Type & spacing system", "Component library", "Visual polish"],
-  },
-  {
-    icon: Sparkles,
-    title: "Marketing & Growth",
-    desc: "Landing pages structured to build trust and generate leads.",
-    points: ["Conversion flows", "Trust sections", "Clear CTAs"],
+    desc: "Speed and structure that improve visibility and conversions.",
+    points: ["Core Web Vitals", "Analytics setup", "Optimized assets"],
   },
 ];
 
@@ -128,55 +87,40 @@ const whoItsFor = [
   {
     icon: Rocket,
     title: "Startups",
-    desc: "Launch fast with a solid, scalable frontend foundation.",
+    desc: "Launch fast with a strong technical and design foundation.",
   },
   {
     icon: Layers,
     title: "SaaS Teams",
-    desc: "Improve UI quality, performance, and maintainability.",
+    desc: "Improve UI quality, scalability, and performance.",
   },
   {
     icon: Settings,
     title: "Growing Businesses",
-    desc: "Upgrade legacy UIs into modern, reliable systems.",
+    desc: "Modernize legacy interfaces into reliable systems.",
   },
 ];
 
-const processSteps = [
+const process = [
   {
-    title: "Discover",
-    desc: "Clarify goals, users, constraints, and success metrics.",
+    step: "01",
+    title: "Understand",
+    desc: "We align on goals, users, and technical constraints.",
   },
   {
+    step: "02",
     title: "Design",
-    desc: "Define layout rhythm, components, and design systems.",
+    desc: "Layouts, systems, and components are defined clearly.",
   },
   {
+    step: "03",
     title: "Build",
-    desc: "Develop clean, responsive, and scalable components.",
+    desc: "Clean, scalable, and accessible code is developed.",
   },
   {
+    step: "04",
     title: "Polish & Launch",
-    desc: "Optimize performance, test thoroughly, and ship confidently.",
-  },
-];
-
-const faqs = [
-  {
-    q: "Do you only build marketing websites?",
-    a: "No. We also build SaaS dashboards, platforms, and internal tools.",
-  },
-  {
-    q: "Can you match an existing SaaS design reference?",
-    a: "Yes. Share references and we’ll align UI quality while keeping your brand unique.",
-  },
-  {
-    q: "Is accessibility included?",
-    a: "Yes. Semantic HTML, focus states, readable contrast, and keyboard support are standard.",
-  },
-  {
-    q: "Can features be added later?",
-    a: "Absolutely. We design systems so new features integrate cleanly.",
+    desc: "Performance tuning, QA, and confident delivery.",
   },
 ];
 
@@ -185,6 +129,8 @@ const faqs = [
 /* -------------------------------------------------------------------------- */
 
 export default function ServicesPage() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <main className="overflow-hidden">
       {/* ------------------------------------------------------------------ */}
@@ -194,11 +140,26 @@ export default function ServicesPage() {
       <section className="relative overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 -z-10">
+          {/* glow */}
           <div className="absolute left-1/2 top-[-30%] h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-primary/14 blur-[170px]" />
-          <div className="absolute left-[6%] top-[50%] h-[420px] w-[420px] rounded-full bg-[hsl(var(--brand-2))]/14 blur-[170px]" />
+          <div className="absolute left-[6%] top-[48%] h-[420px] w-[420px] rounded-full bg-[hsl(var(--brand-2))]/14 blur-[170px]" />
+
+          {/* softened grid */}
+          <div className="absolute inset-0 opacity-[0.42] [mask-image:radial-gradient(ellipse_at_center,black,transparent_68%)]">
+            <div className="h-full w-full bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:52px_52px]" />
+          </div>
+
+          {/* bottom vignette */}
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
         </div>
 
-        <MotionSection className="container-page py-24 text-center lg:py-32">
+        <motion.div
+          variants={container}
+          initial={reduceMotion ? false : "hidden"}
+          animate={reduceMotion ? false : "show"}
+          className="container-page py-24 text-center lg:py-32"
+        >
+          {/* Badge */}
           <motion.div
             variants={fadeUp}
             className="mx-auto inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/60 px-4 py-1.5 text-xs text-muted-foreground backdrop-blur sm:text-sm"
@@ -207,73 +168,97 @@ export default function ServicesPage() {
             Services & capabilities
           </motion.div>
 
-          <motion.h1
-            variants={fadeUp}
-            className="h1 mx-auto mt-8 max-w-4xl"
-          >
-            Everything you need to{" "}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-primary to-[hsl(var(--brand-2))] bg-clip-text text-transparent">
-                build, launch, and scale
-              </span>
-              <span className="absolute inset-x-0 -bottom-2 h-[10px] bg-primary/18 blur-xl" />
+          {/* Heading */}
+          <motion.h1 variants={fadeUp} className="h1 mx-auto mt-8 max-w-4xl">
+            Thoughtful design and{" "}
+            <span className="bg-gradient-to-r from-primary to-[hsl(var(--brand-2))] bg-clip-text text-transparent">
+              reliable engineering
             </span>{" "}
-            modern software.
+            for modern products.
           </motion.h1>
 
+          {/* Description */}
           <motion.p variants={fadeUp} className="lead mx-auto mt-6 max-w-3xl">
-            From premium SaaS UI to performance-first development, we help teams
-            ship reliable software systems that grow with their business.
+            We help teams design, build, and scale software that stays clear,
+            fast, and maintainable as it grows.
           </motion.p>
 
+          {/* CTAs */}
           <motion.div
             variants={fadeUp}
             className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
-            <ButtonLink href="/contact" size="lg" className="group">
-              Start a project
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </ButtonLink>
+            <Link
+              href="/contact"
+              className="group inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-sm font-medium text-primary-foreground shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              Start a Project
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
 
             <Link
-              href="#services"
+              href="/services"
               className="inline-flex h-12 items-center justify-center rounded-full border border-border/80 bg-card/50 px-8 text-sm font-medium transition hover:bg-card/70"
             >
               Explore services
             </Link>
           </motion.div>
-        </MotionSection>
+        </motion.div>
       </section>
-
       {/* ------------------------------------------------------------------ */}
       {/* WHO IT'S FOR                                                       */}
       {/* ------------------------------------------------------------------ */}
 
       <section className="section">
         <div className="container-page">
-          <MotionSection className="grid gap-6 md:grid-cols-3">
-            {whoItsFor.map(({ icon: Icon, title, desc }) => (
-              <motion.div
-                key={title}
-                variants={fadeUp}
-                className="card-surface p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-lg"
-              >
-                <Icon className="h-6 w-6 text-primary" />
-                <h3 className="mt-4 font-semibold">{title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
-              </motion.div>
-            ))}
-          </MotionSection>
+          <motion.div
+            variants={container}
+            initial={reduceMotion ? false : "hidden"}
+            whileInView={reduceMotion ? false : "show"}
+            viewport={{ once: true }}
+            className="grid gap-6 md:grid-cols-3"
+          >
+            {whoItsFor.map((item) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.title}
+                  variants={fadeUp}
+                  className="card-surface p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <Icon className="h-6 w-6 text-primary" />
+                  <h3 className="mt-4 font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </section>
 
       {/* ------------------------------------------------------------------ */}
-      {/* SERVICES GRID                                                      */}
+      {/* SERVICES                                                           */}
       {/* ------------------------------------------------------------------ */}
 
       <section id="services" className="section">
         <div className="container-page">
-          <MotionSection className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="kicker">SERVICES</p>
+            <h2 className="h2 mt-4">What we help you build</h2>
+            <p className="lead mt-5">
+              Clear systems, modern interfaces, and scalable foundations.
+            </p>
+          </div>
+
+          <motion.div
+            variants={container}
+            initial={reduceMotion ? false : "hidden"}
+            whileInView={reduceMotion ? false : "show"}
+            viewport={{ once: true }}
+            className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {services.map((s) => {
               const Icon = s.icon;
               return (
@@ -300,7 +285,7 @@ export default function ServicesPage() {
                 </motion.article>
               );
             })}
-          </MotionSection>
+          </motion.div>
         </div>
       </section>
 
@@ -310,47 +295,35 @@ export default function ServicesPage() {
 
       <section className="section">
         <div className="container-page">
-          <MotionSection className="grid gap-6 md:grid-cols-4">
-            {processSteps.map((step, i) => (
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="kicker">PROCESS</p>
+            <h2 className="h2 mt-4">A structured way to deliver</h2>
+            <p className="lead mt-5">
+              Predictable steps, calm execution, and long-term results.
+            </p>
+          </div>
+
+          <motion.div
+            variants={container}
+            initial={reduceMotion ? false : "hidden"}
+            whileInView={reduceMotion ? false : "show"}
+            viewport={{ once: true }}
+            className="mt-14 grid gap-6 md:grid-cols-4"
+          >
+            {process.map((p) => (
               <motion.div
-                key={step.title}
+                key={p.step}
                 variants={fadeUp}
                 className="card-surface p-6 shadow-soft"
               >
                 <div className="text-sm font-semibold text-primary">
-                  Step {i + 1}
+                  Step {p.step}
                 </div>
-                <h3 className="mt-2 font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {step.desc}
-                </p>
+                <h3 className="mt-2 font-semibold">{p.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
               </motion.div>
             ))}
-          </MotionSection>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------------ */}
-      {/* FAQ                                                                */}
-      {/* ------------------------------------------------------------------ */}
-
-      <section className="section">
-        <div className="container-page">
-          <div className="mx-auto max-w-3xl space-y-3">
-            {faqs.map((f) => (
-              <details
-                key={f.q}
-                className="card-surface shadow-soft transition"
-              >
-                <summary className="cursor-pointer px-6 py-5 font-semibold focus-visible:ring-2 focus-visible:ring-primary rounded-xl">
-                  {f.q}
-                </summary>
-                <div className="px-6 pb-5 text-sm text-muted-foreground">
-                  {f.a}
-                </div>
-              </details>
-            ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

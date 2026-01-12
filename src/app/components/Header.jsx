@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { ButtonLink } from "../../components/ui/button";
@@ -39,6 +40,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50">
+      {/* Skip link */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-card focus:px-4 focus:py-2"
@@ -46,25 +48,27 @@ export default function Header() {
         Skip to content
       </a>
 
-      <div className="border-b border-border/60 bg-background/60 backdrop-blur">
+      {/* Header bar */}
+      <div className="border-b border-border/60 bg-background/70 backdrop-blur">
         <div className="container-page">
-          <div className="flex h-16 items-center justify-between">
-            {/* Brand */}
+          {/* ⬇ Broader header height */}
+          <div className="flex h-20 items-center justify-between">
+            {/* LOGO */}
             <Link href="/" className="flex items-center gap-3">
-              <div className="grid h-9 w-9 place-items-center rounded-2xl border border-border/70 bg-card/60 shadow-soft">
-                <span className="text-sm font-semibold text-foreground">S</span>
-              </div>
-              <div className="leading-tight">
-                <div className="text-sm font-semibold tracking-tight">
-                  SoftwareCo
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Build • Scale • Automate
-                </div>
+              {/* Controlled logo sizing */}
+              <div className="relative">
+                <Image
+                  src="/Logo.png"
+                  alt="Company logo"
+                  width={140}
+                  height={33}
+                  className="object-contain"
+                  priority
+                />
               </div>
             </Link>
 
-            {/* Desktop nav */}
+            {/* DESKTOP NAV */}
             <nav
               className="hidden items-center gap-1 md:flex"
               aria-label="Primary"
@@ -74,9 +78,9 @@ export default function Header() {
                   key={item.href}
                   href={item.href}
                   className={cx(
-                    "rounded-full px-4 py-2 text-sm transition",
+                    "rounded-full px-5 py-2.5 text-sm transition-all",
                     isActive(item.href)
-                      ? "bg-card/70 text-foreground"
+                      ? "bg-card/80 text-foreground"
                       : "text-muted-foreground hover:bg-card/60 hover:text-foreground"
                   )}
                   aria-current={isActive(item.href) ? "page" : undefined}
@@ -86,7 +90,7 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* Desktop CTA */}
+            {/* DESKTOP CTA */}
             <div className="hidden items-center gap-3 md:flex">
               <ButtonLink href="/contact" size="md" className="group">
                 Start a Project
@@ -94,10 +98,10 @@ export default function Header() {
               </ButtonLink>
             </div>
 
-            {/* Mobile menu button */}
+            {/* MOBILE MENU BUTTON */}
             <button
               type="button"
-              className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border/70 bg-card/50 hover:bg-card/70"
+              className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border/70 bg-card/50 transition hover:bg-card/70"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
@@ -108,15 +112,16 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu overlay */}
+      {/* MOBILE MENU */}
       {open && (
         <div className="md:hidden fixed inset-0 z-50">
           <div
             className="absolute inset-0 bg-black/55"
             onClick={() => setOpen(false)}
           />
-          <div className="absolute left-1/2 top-4 w-[92%] -translate-x-1/2">
-            <div className="card-surface shadow-soft p-4">
+
+          <div className="absolute left-1/2 top-6 w-[92%] -translate-x-1/2">
+            <div className="card-surface shadow-soft p-5">
               <div className="flex items-center justify-between">
                 <div className="text-sm font-semibold">Menu</div>
                 <button
@@ -129,25 +134,24 @@ export default function Header() {
                 </button>
               </div>
 
-              <nav className="mt-3 grid gap-1" aria-label="Mobile primary">
+              <nav className="mt-4 grid gap-1">
                 {NAV.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     className={cx(
-                      "rounded-2xl px-4 py-3 text-sm transition",
+                      "rounded-2xl px-4 py-3 text-sm transition-all",
                       isActive(item.href)
                         ? "bg-card/80 text-foreground"
                         : "text-muted-foreground hover:bg-card/60 hover:text-foreground"
                     )}
-                    aria-current={isActive(item.href) ? "page" : undefined}
                   >
                     {item.label}
                   </Link>
                 ))}
               </nav>
 
-              <div className="mt-4">
+              <div className="mt-5">
                 <ButtonLink
                   href="/contact"
                   size="lg"
@@ -156,6 +160,7 @@ export default function Header() {
                   Start a Project
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </ButtonLink>
+
                 <p className="mt-3 text-xs text-muted-foreground text-center">
                   Clean UI • Fast builds • Premium feel
                 </p>

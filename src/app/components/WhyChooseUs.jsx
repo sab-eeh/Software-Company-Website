@@ -1,124 +1,154 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ShieldCheck,
-  Code2,
   Layers,
   Users,
   Zap,
   CheckCircle2,
+  Compass,
 } from "lucide-react";
+
+/* -------------------------------------------------------------------------- */
+/*                                   DATA                                     */
+/* -------------------------------------------------------------------------- */
 
 const reasons = [
   {
-    icon: Code2,
-    title: "Engineering-first approach",
+    icon: Compass,
+    title: "Thoughtful problem-solving",
     description:
-      "We don’t just design interfaces — we architect systems. Our work focuses on clean code, scalability, and long-term maintainability.",
+      "We take time to understand the real problem before proposing solutions, so decisions are intentional — not reactive.",
   },
   {
     icon: Layers,
-    title: "Scalable from day one",
+    title: "Designed to scale naturally",
     description:
-      "Every product we build is designed to grow — from early-stage MVPs to production-grade platforms serving real users.",
+      "Everything is structured with growth in mind, so products remain clear, stable, and easy to extend over time.",
   },
   {
     icon: ShieldCheck,
-    title: "Security & best practices",
+    title: "Reliable by default",
     description:
-      "We follow industry best practices for performance, security, accessibility, and SEO — no shortcuts, no compromises.",
+      "Quality, accessibility, and performance are treated as fundamentals — not optional add-ons.",
   },
   {
     icon: Zap,
-    title: "Speed without sacrificing quality",
+    title: "Fast, without cutting corners",
     description:
-      "Efficient workflows, modern tooling, and clear communication allow us to move fast while keeping quality high.",
+      "Clear workflows and focused execution allow us to move efficiently while keeping standards high.",
   },
   {
     icon: Users,
-    title: "Clear communication & ownership",
+    title: "True ownership & collaboration",
     description:
-      "We work as an extension of your team, taking ownership of outcomes and keeping you informed at every step.",
+      "We work as a close partner, take responsibility for outcomes, and communicate openly at every stage.",
   },
   {
     icon: CheckCircle2,
-    title: "Built for real business impact",
+    title: "Built for real outcomes",
     description:
-      "Our focus is not just delivery — it’s results. We align technology decisions with your business goals.",
+      "Success isn’t measured by delivery alone — it’s measured by how well the product supports your goals.",
   },
 ];
 
+/* -------------------------------------------------------------------------- */
+/*                               ANIMATIONS                                   */
+/* -------------------------------------------------------------------------- */
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const container = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08 },
+  },
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                   COMPONENT                                 */
+/* -------------------------------------------------------------------------- */
+
 export default function WhyChooseUs() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section className="relative py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Heading */}
-        <div className="mx-auto max-w-3xl text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 6 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="text-sm font-medium tracking-wide text-primary"
-          >
+    <section className="section relative">
+      <div className="container-page">
+        {/* ------------------------------------------------------------------ */}
+        {/* HEADER                                                             */}
+        {/* ------------------------------------------------------------------ */}
+
+        <motion.header
+          initial={reduceMotion ? false : "hidden"}
+          whileInView={reduceMotion ? false : "visible"}
+          viewport={{ once: true }}
+          variants={container}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <motion.p variants={fadeUp} className="kicker">
             WHY CHOOSE US
           </motion.p>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl"
-          >
-            A technology partner, not just a service provider
+          <motion.h2 variants={fadeUp} className="h2 mt-4">
+            A long-term partner, not just a vendor
           </motion.h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.12 }}
-            className="mt-5 text-base text-muted-foreground sm:text-lg"
-          >
-            We work closely with founders, product teams, and businesses to
-            design and engineer software that is reliable, scalable, and built
-            for real-world use.
+          <motion.p variants={fadeUp} className="lead mx-auto mt-5 max-w-2xl">
+            We partner closely with teams who care about quality, clarity, and
+            sustainable growth — building products meant to last.
           </motion.p>
-        </div>
+        </motion.header>
 
-        {/* Cards */}
-        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {reasons.map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.06 }}
-              className="group relative rounded-3xl border border-border/70 bg-card/60 p-6 backdrop-blur transition hover:bg-card/80"
-            >
-              {/* Icon */}
-              <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border/70 bg-background/50">
-                <item.icon className="h-5 w-5 text-primary" />
-              </div>
+        {/* ------------------------------------------------------------------ */}
+        {/* GRID                                                               */}
+        {/* ------------------------------------------------------------------ */}
 
-              {/* Title */}
-              <h3 className="text-base font-semibold">{item.title}</h3>
+        <motion.div
+          initial={reduceMotion ? false : "hidden"}
+          whileInView={reduceMotion ? false : "visible"}
+          viewport={{ once: true, margin: "-120px" }}
+          variants={container}
+          className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {reasons.map((item) => {
+            const Icon = item.icon;
 
-              {/* Description */}
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {item.description}
-              </p>
+            return (
+              <motion.article
+                key={item.title}
+                variants={fadeUp}
+                className="group relative card-surface p-7 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lg"
+              >
+                {/* Icon */}
+                <div className="mb-5 grid h-11 w-11 place-items-center rounded-2xl border border-border/70 bg-background/40 transition group-hover:scale-105">
+                  <Icon className="h-5 w-5 text-primary" />
+                </div>
 
-              {/* Hover glow */}
-              <div className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition group-hover:opacity-100">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 to-transparent" />
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                {/* Title */}
+                <h3 className="text-base font-semibold">{item.title}</h3>
+
+                {/* Description */}
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
+
+                {/* Subtle hover glow */}
+                <div className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 to-transparent" />
+                </div>
+              </motion.article>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
