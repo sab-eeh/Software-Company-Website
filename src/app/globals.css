@@ -4,37 +4,39 @@
 
 @layer base {
   :root {
-    /* Premium Dark SaaS Theme (soft contrast, readable) */
+    /* ------------------------------------------------------- */
+    /* MODERATE PREMIUM SAAS THEME (Balanced Dark)             */
+    /* ------------------------------------------------------- */
 
-    --background: 225 45% 8%;
-    --foreground: 220 35% 96%;
+    --background: 224 32% 11%;          /* softer dark */
+    --foreground: 220 30% 96%;
 
-    --card: 228 38% 12%;
-    --card-foreground: 220 35% 96%;
+    --card: 225 30% 14%;                /* lifted card */
+    --card-foreground: 220 30% 96%;
 
-    --popover: 228 38% 12%;
-    --popover-foreground: 220 35% 96%;
+    --popover: 225 30% 14%;
+    --popover-foreground: 220 30% 96%;
 
-    --primary: 235 92% 72%; /* Indigo */
+    --primary: 235 90% 70%;              /* Indigo */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 228 30% 16%;
-    --secondary-foreground: 220 35% 96%;
+    --secondary: 224 26% 18%;
+    --secondary-foreground: 220 30% 96%;
 
-    --muted: 228 25% 16%;
-    --muted-foreground: 220 18% 72%;
+    --muted: 224 24% 20%;
+    --muted-foreground: 220 15% 70%;
 
-    --accent: 230 30% 18%;
-    --accent-foreground: 220 35% 96%;
+    --accent: 224 26% 22%;
+    --accent-foreground: 220 30% 96%;
 
-    --destructive: 0 65% 45%;
+    --destructive: 0 70% 48%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 228 28% 20%;
-    --input: 228 28% 20%;
-    --ring: 235 92% 72%;
+    --border: 224 22% 26%;
+    --input: 224 22% 26%;
+    --ring: 235 90% 70%;
 
-    --brand-2: 180 90% 45%; /* Teal accent */
+    --brand-2: 185 85% 48%;             /* Teal accent */
 
     --radius: 1rem;
   }
@@ -52,7 +54,7 @@
     text-rendering: geometricPrecision;
   }
 
-  /* Better default focus (accessibility) */
+  /* Focus ring (accessible but elegant) */
   :focus-visible {
     outline: none;
     box-shadow: 0 0 0 3px hsl(var(--ring) / 0.35);
@@ -64,7 +66,10 @@
 }
 
 @layer components {
-  /* Layout primitives */
+  /* ------------------------------------------------------- */
+  /* Layout                                                  */
+  /* ------------------------------------------------------- */
+
   .container-page {
     @apply mx-auto w-full max-w-7xl px-6 lg:px-8;
   }
@@ -73,7 +78,10 @@
     @apply py-20 sm:py-24;
   }
 
-  /* Typography primitives */
+  /* ------------------------------------------------------- */
+  /* Typography                                             */
+  /* ------------------------------------------------------- */
+
   .kicker {
     @apply text-xs font-semibold tracking-[0.2em] text-primary;
   }
@@ -90,16 +98,23 @@
     @apply text-base text-muted-foreground sm:text-lg leading-relaxed;
   }
 
-  /* Cards */
+  /* ------------------------------------------------------- */
+  /* Card System                                            */
+  /* ------------------------------------------------------- */
+
   .card-surface {
-    @apply rounded-3xl border border-border/70 bg-card/70 backdrop-blur;
+    @apply rounded-3xl border border-border/70 bg-card/75 backdrop-blur;
   }
 }
 
 @layer utilities {
-  /* Subtle premium shadow (not heavy) */
+  /* ------------------------------------------------------- */
+  /* Premium SaaS Shadow                                    */
+  /* ------------------------------------------------------- */
+
   .shadow-soft {
-    box-shadow: 0 1px 0 hsl(var(--foreground) / 0.04) inset,
-      0 10px 30px hsl(0 0% 0% / 0.25);
+    box-shadow:
+      0 1px 0 hsl(var(--foreground) / 0.04) inset,
+      0 12px 28px hsl(0 0% 0% / 0.22);
   }
 }
